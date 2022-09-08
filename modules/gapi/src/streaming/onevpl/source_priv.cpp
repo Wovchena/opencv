@@ -226,11 +226,7 @@ GSource::Priv::Priv(std::shared_ptr<IDataProvider> provider,
         std::unique_ptr<VPLAccelerationPolicy> acceleration = initializeHWAccel(device_selector);
 
         // TODO  Add factory static method in ProcessingEngineBase
-        if (mfx_impl_description->ApiVersion.Major >= VPL_NEW_API_MAJOR_VERSION) {
-            GAPI_Assert(false &&
-                        "GSource mfx_impl_description->ApiVersion.Major >= VPL_NEW_API_MAJOR_VERSION"
-                        " - is not implemented");
-        } else {
+        {
             const auto& transcode_params = VPLLegacyTranscodeEngine::get_vpp_params(preferred_params);
             if (!transcode_params.empty()) {
                 engine.reset(new VPLLegacyTranscodeEngine(std::move(acceleration)));
